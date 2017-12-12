@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="common-style.css" library="css" />
+	<title>Vespa Shop</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1"></meta>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"></link>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/css/bootstrap-material-design.min.css" integrity="sha384-R80DC0KVBO4GSTw+wZ5x2zn2pu4POSErBkf8/fSFhPXHxvHJydT0CSgAP2Yo2r4I" crossorigin="anonymous"></link>
+</h:head>
+
+<h:body>
+
+	<div id="page">
+
+		<div id="header">
+			<ui:insert name="header">
+				<ui:include src="/template/header.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="content">
+			<ui:insert name="content">
+				<ui:include src="/template/content.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="footer">
+			<ui:insert name="footer">
+				<ui:include src="/template/footer.xhtml" />
+			</ui:insert>
+		</div>
+
+	</div>
+
+</h:body>
+</html>
