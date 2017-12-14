@@ -8,10 +8,13 @@
 
 <h:body>
 	<ui:composition template="template/layout.xhtml">
-		<h3>Hello Test</h3>
-		<h:form>
-			<h:commandButton value="Test" action="#{loginController.selectUsers}"></h:commandButton>
-		</h:form>
+		<ui:define name="content">
+			<h3>Hello Test</h3>
+			<h:form>
+				<h:commandButton value="Test"
+					action="#{loginController.selectUsers}"></h:commandButton>
+			</h:form>
+		</ui:define>
 	</ui:composition>
 </h:body>
 </html>

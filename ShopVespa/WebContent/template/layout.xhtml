@@ -9,8 +9,11 @@
 	<h:outputStylesheet name="common-style.css" library="css" />
 	<title>Vespa Shop</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"></meta>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"></link>
-<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/css/bootstrap-material-design.min.css" integrity="sha384-R80DC0KVBO4GSTw+wZ5x2zn2pu4POSErBkf8/fSFhPXHxvHJydT0CSgAP2Yo2r4I" crossorigin="anonymous"></link>
+	<link rel='stylesheet'
+		href='webjars/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'></link>
+	<link rel='stylesheet' href='resources/style.css'></link>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
 </h:head>
 
 <h:body>
@@ -23,7 +26,7 @@
 			</ui:insert>
 		</div>
 
-		<div id="content">
+		<div id="content" class="container">
 			<ui:insert name="content">
 				<ui:include src="/template/content.xhtml" />
 			</ui:insert>
