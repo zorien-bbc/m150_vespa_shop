@@ -4,5 +4,10 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="ShopVespa">
 		<jta-data-source>VespaShop_Pool</jta-data-source>
+		<class>ch.bzz.model.Bestellung</class>
+		<class>ch.bzz.model.Kategorie</class>
+		<class>ch.bzz.model.Kunde</class>
+		<class>ch.bzz.model.Produkt</class>
+		<class>ch.bzz.model.Tag</class>
 	</persistence-unit>
 </persistence>

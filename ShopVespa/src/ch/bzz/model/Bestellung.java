@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * The persistent class for the bestellung database table.
+ * The persistent class for the Bestellung database table.
  * 
  */
 @Entity
@@ -16,8 +16,10 @@ public class Bestellung implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idBestellung;
 
+	@Column(name="Bestelldatum")
 	private String bestelldatum;
 
 	//bi-directional many-to-one association to Kunde

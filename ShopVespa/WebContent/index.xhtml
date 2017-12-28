@@ -9,10 +9,54 @@
 <h:body>
 	<ui:composition template="template/layout.xhtml">
 		<ui:define name="content">
-			<h3>Hello Test</h3>
+			<h4>Highlights</h4>
+			<div id="demo" class="carousel slide" data-ride="carousel">
+
+				<!-- Indicators -->
+				<ul class="carousel-indicators">
+					<li data-target="#demo" data-slide-to="0" class="active"></li>
+					<li data-target="#demo" data-slide-to="1"></li>
+					<li data-target="#demo" data-slide-to="2"></li>
+				</ul>
+
+				<!-- The slideshow -->
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="http://via.placeholder.com/900x300" alt="Los Angeles"></img>
+					</div>
+					<div class="carousel-item">
+						<img src="http://via.placeholder.com/900x300" alt="Chicago"></img>
+					</div>
+					<div class="carousel-item">
+						<img src="http://via.placeholder.com/900x300" alt="New York"></img>
+					</div>
+				</div>
+
+				<!-- Left and right controls -->
+				<a class="carousel-control-prev" href="#demo" data-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</a> <a class="carousel-control-next" href="#demo" data-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</a>
+			</div>
+			<h4 style="margin-top: 25px">Produkte</h4>
 			<h:form>
-				<h:commandButton value="Test"
-					action="#{loginController.selectUsers}"></h:commandButton>
+				<div class="row">
+					<ui:repeat var="produkt" value="#{indexController.produkte}">
+						<div class="col-sm-4 productitem">
+							<h:link outcome="detail">
+								<img src="http://via.placeholder.com/150x150" alt="New York"></img>
+								<f:param name="id" value="#{produkt.idProdukte}"></f:param>
+							</h:link>
+							<p style="color: red;">#{produkt.preis}</p>
+							<p style="margin-top: -18px">#{produkt.bezeichnung}</p>
+							<h:commandLink style="margin-top:-15px"
+								styleClass="btn btn-primary" value="Kaufen ">
+								<i class="ion-ios-cart-outline icons" style="font-size: 15px"></i>
+							</h:commandLink>
+						</div>
+					</ui:repeat>
+				</div>
 			</h:form>
 		</ui:define>
 	</ui:composition>

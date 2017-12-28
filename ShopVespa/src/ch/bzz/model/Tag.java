@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * The persistent class for the tags database table.
+ * The persistent class for the Tags database table.
  * 
  */
 @Entity
@@ -16,8 +16,10 @@ public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idTags;
 
+	@Column(name="Name")
 	private String name;
 
 	//bi-directional many-to-one association to Produkt

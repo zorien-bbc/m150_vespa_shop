@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * The persistent class for the produkt database table.
+ * The persistent class for the Produkt database table.
  * 
  */
 @Entity
@@ -16,25 +16,30 @@ public class Produkt implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idProdukte;
 
+	@Column(name="ArtikelNr")
 	private String artikelNr;
 
+	@Column(name="Beschreibung")
+	private String beschreibung;
+
+	@Column(name="Bezeichnung")
 	private String bezeichnung;
 
+	@Column(name="BildPfad")
 	private String bildPfad;
 
-	private String lagerbestand;
+	@Column(name="Lagerbestand")
+	private int lagerbestand;
 
+	@Column(name="Preis")
 	private float preis;
-
-	private String produktcol;
-
-	private int produktkategorieID;
 
 	//bi-directional many-to-one association to Kategorie
 	@ManyToOne
-	@JoinColumn(name="Kategorie_idKategorie1")
+	@JoinColumn(name="KategorieID")
 	private Kategorie kategorie;
 
 	//bi-directional many-to-one association to Tag
@@ -45,7 +50,7 @@ public class Produkt implements Serializable {
 	//bi-directional many-to-many association to Bestellung
 	@ManyToMany
 	@JoinTable(
-		name="warenkorb"
+		name="Warenkorb"
 		, joinColumns={
 			@JoinColumn(name="Produkt_idProdukte")
 			}
@@ -74,6 +79,14 @@ public class Produkt implements Serializable {
 		this.artikelNr = artikelNr;
 	}
 
+	public String getBeschreibung() {
+		return this.beschreibung;
+	}
+
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
+
 	public String getBezeichnung() {
 		return this.bezeichnung;
 	}
@@ -90,11 +103,11 @@ public class Produkt implements Serializable {
 		this.bildPfad = bildPfad;
 	}
 
-	public String getLagerbestand() {
+	public int getLagerbestand() {
 		return this.lagerbestand;
 	}
 
-	public void setLagerbestand(String lagerbestand) {
+	public void setLagerbestand(int lagerbestand) {
 		this.lagerbestand = lagerbestand;
 	}
 
@@ -106,22 +119,6 @@ public class Produkt implements Serializable {
 		this.preis = preis;
 	}
 
-	public String getProduktcol() {
-		return this.produktcol;
-	}
-
-	public void setProduktcol(String produktcol) {
-		this.produktcol = produktcol;
-	}
-
-	public int getProduktkategorieID() {
-		return this.produktkategorieID;
-	}
-
-	public void setProduktkategorieID(int produktkategorieID) {
-		this.produktkategorieID = produktkategorieID;
-	}
-
 	public Kategorie getKategorie() {
 		return this.kategorie;
 	}
@@ -129,6 +126,7 @@ public class Produkt implements Serializable {
 	public void setKategorie(Kategorie kategorie) {
 		this.kategorie = kategorie;
 	}
+
 
 	public Tag getTag() {
 		return this.tag;

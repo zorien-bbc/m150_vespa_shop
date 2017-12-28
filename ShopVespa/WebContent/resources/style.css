@@ -2,7 +2,8 @@ html {
 	height: 100%;
 	box-sizing: border-box;
 }
-body{
+
+body {
 	min-height: 100%;
 }
 
@@ -14,6 +15,15 @@ body{
 	left: 0;
 	text-align: center;
 }
-.icons{
-	font-size:25px;
+
+.icons {
+	font-size: 25px;
+}
+
+.productitem {
+	margin-top: 25px;
+	border: 1px solid #e1e7ec;
+	border-radius: 7px;
+	padding: 5px;
+	margin-top: 25px;
 }
