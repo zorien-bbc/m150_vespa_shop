@@ -6,7 +6,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ch.bzz.model.Kategorie;
 import ch.bzz.model.Produkt;
+import ch.bzz.model.Tag;
 
 @Stateless
 public class ProduktService {
@@ -21,6 +23,21 @@ public class ProduktService {
 	public Produkt find(int produktID) {
 		System.out.println(produktID);
 		return em.find(Produkt.class, produktID);
+	}
+
+	public Kategorie find(String katname) {
+		return (Kategorie) em.createQuery("SELECT k FROM Kategorie k WHERE k.name LIKE :name").setParameter("name", katname).getSingleResult();
+	}
+
+	public void addProdukt(Produkt produkt) {
+		System.out.println("test");
+		em.persist(produkt);
+
+	}
+
+	public Tag collectTag(int i) {
+		// TODO Auto-generated method stub
+		return em.find(Tag.class, i);
 	}
 
 }

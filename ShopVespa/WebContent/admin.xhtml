@@ -6,7 +6,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<h:outputStylesheet name="common-style.css" library="css" />
 	<title>Vespa Shop Admin</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1"></meta>
 	<link rel='stylesheet'
@@ -17,48 +16,40 @@
 </h:head>
 
 <h:body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container">
-		<a class="navbar-brand" href="#">Admin</a>
+	<ui:include src="template/adminHeader.xhtml"></ui:include>
 
-
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">Lager</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Bestellungen</a></li>
-			</ul>
-		</div>
-		<a class="btn btn-success" href="index.xhtml">Back to Shop</a>
-
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-	</div>
-	</nav>
 	<div id="page">
 		<div class="container">
+			<button class="btn btn-success"
+				style="margin-top: 10px; margin-left: 72.8%;" data-toggle="modal"
+				data-target="#exampleModal">Neues Produkt</button>
 			<div class="row">
 				<ui:repeat var="produkt" value="#{adminController.lager}">
-					
-						<div class="col-md-offset-1 col-md-3 productitem"
-							style="margin: 20px;">
-							<h:form>
+
+					<div class="col-md-offset-1 col-md-3 productitem"
+						style="margin: 20px;">
+						<h:form name="saveForm">
 							<img src="http://via.placeholder.com/150x150" alt="New York"></img>
 							<p style="color: red;">#{produkt.preis}</p>
 							<p style="margin-top: -18px">#{produkt.bezeichnung}</p>
-							<h:inputText style="margin-top: -18px" type="number"
-								value="#{produkt.lagerbestand}"></h:inputText>
-								</h:form>
-						</div>
-					
+							<div class="form-inline">
+								<div class="form-group  mb-2">
+									<h:outputLabel for="inputPassword2">Lagerbestand</h:outputLabel>
+									<h:inputText style="width: 100%" type="number" min="0"
+										class="form-control" id="inputPassword2"
+										value="#{produkt.lagerbestand}"></h:inputText>
+								</div>
+								<h:commandButton class="btn btn-primary mb-2" value="Bestätigen"></h:commandButton>
+							</div>
+						</h:form>
+					</div>
+
 				</ui:repeat>
 			</div>
 		</div>
 
 	</div>
 	<ui:include src="template/footer.xhtml"></ui:include>
-
+	<ui:include src="newProductModal.xhtml"></ui:include>
 </h:body>
 </html>

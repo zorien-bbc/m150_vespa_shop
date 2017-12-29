@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Neues Produkt
+							hinzufügen</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+
+						<div class="form-inline">
+							<fieldset>
+								<h:form name="newProductForm">
+
+									<!-- Text input-->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="bezeichnung">Bezeichnung</label>
+										<div class="col-md-4">
+											<h:inputText id="bezeichnung" name="bezeichnung"
+												placeholder="Bezeichnung" class="form-control input-md"
+												required="true" type="text"
+												value="#{adminController.produkt.bezeichnung}"></h:inputText>
+										</div>
+									</div>
+
+									<!-- Textarea -->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="beschreibung">Beschreibung</label>
+										<div class="col-md-4">
+											<h:inputTextarea class="form-control" id="beschreibung"
+												name="beschreibung"
+												value="#{adminController.produkt.beschreibung}"></h:inputTextarea>
+										</div>
+									</div>
+
+									<!-- Appended Input-->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="preis">Preis</label>
+										<div class="col-md-4">
+											<div class="input-group">
+												<h:inputText id="preis" name="preis" class="form-control"
+													placeholder="0.0" required="true"
+													value="#{adminController.produkt.preis}">
+												</h:inputText>
+											</div>
+
+										</div>
+									</div>
+									<!-- Appended Input-->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="lagerbestand">Lagerbestand</label>
+										<div class="col-md-4">
+											<div class="input-group">
+												<h:inputText id="lagerbestand" name="lagerbestand"
+													class="form-control" placeholder="" required="true"
+													type="text" value="#{adminController.produkt.lagerbestand}">
+												</h:inputText>
+											</div>
+
+										</div>
+									</div>
+									<!-- Text input-->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="artikelnr">Artikel
+											Nummer</label>
+										<div class="col-md-4">
+											<h:inputText id="artikelnr" name="artikelnr"
+												placeholder="123-123-123" class="form-control input-md"
+												required="" type="text"
+												value="#{adminController.produkt.artikelNr}"></h:inputText>
+										</div>
+									</div>
+
+									<!-- 									Select Basic -->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="kategorie">Kategorie</label>
+										<div class="col-md-4">
+											<h:selectOneMenu class="form-control" id="kategorie"
+												value="#{adminController.kat}">
+												<f:selectItems value="#{adminController.kategorien}"/>
+											</h:selectOneMenu>
+										</div>
+									</div>
+
+									<!-- 									Text input -->
+									<!-- 									<div class="form-group"> -->
+									<!-- 										<label class="col-md-4 control-label" for="tags">Tags</label> -->
+									<!-- 										<div class="col-md-4"> -->
+									<!-- 																						<h:inputText id="tags" name="tags" placeholder="" -->
+									<!-- 																							class="form-control input-md" required="true" type="text"></h:inputText> -->
+									<!-- 										</div> -->
+									<!-- 									</div> -->
+
+									<!-- 									File Button -->
+									<!-- 									<div class="form-group"> -->
+									<!-- 										<label class="col-md-4 control-label" for="bildpfad">Bild -->
+									<!-- 											Pfad</label> -->
+									<!-- 										<div class="col-md-4"> -->
+									<!-- 											<input id="bildpfad" name="bildpfad" class="input-file" -->
+									<!-- 												type="file"></input> -->
+									<!-- 										</div> -->
+									<!-- 									</div> -->
+									<h:messages></h:messages>
+
+									<h:commandButton action="#{adminController.addProdukt}"
+										class="btn btn-primary" value="Hinzufügen">
+									</h:commandButton>
+								</h:form>
+							</fieldset>
+						</div>
+
+					</div>
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

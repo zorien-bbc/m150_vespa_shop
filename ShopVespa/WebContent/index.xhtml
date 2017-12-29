@@ -43,10 +43,10 @@
 			<h:form>
 				<div class="row">
 					<ui:repeat var="produkt" value="#{indexController.produkte}">
-						<div class="col-sm-4 productitem">
+						<div class="col-sm-3 productitem">
 							<h:link outcome="detail">
 								<img src="http://via.placeholder.com/150x150" alt="New York"></img>
-								<f:param name="id" value="#{produkt.idProdukte}"></f:param>
+								<f:param name="id" value="#{produkt.idProdukt}"></f:param>
 							</h:link>
 							<p style="color: red;">#{produkt.preis}</p>
 							<p style="margin-top: -18px">#{produkt.bezeichnung}</p>

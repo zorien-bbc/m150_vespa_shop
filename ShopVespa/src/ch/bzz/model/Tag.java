@@ -16,14 +16,23 @@ public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idTags;
 
 	@Column(name="Name")
 	private String name;
 
-	//bi-directional many-to-one association to Produkt
-	@OneToMany(mappedBy="tag")
+	//bi-directional many-to-many association to Produkt
+	@ManyToMany
+	@JoinTable(
+		name="Tags_has_Produkt"
+		, joinColumns={
+			@JoinColumn(name="Tags_idTags")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="Produkt_idProdukte")
+			}
+		)
 	private List<Produkt> produkts;
 
 	public Tag() {
@@ -51,20 +60,6 @@ public class Tag implements Serializable {
 
 	public void setProdukts(List<Produkt> produkts) {
 		this.produkts = produkts;
-	}
-
-	public Produkt addProdukt(Produkt produkt) {
-		getProdukts().add(produkt);
-		produkt.setTag(this);
-
-		return produkt;
-	}
-
-	public Produkt removeProdukt(Produkt produkt) {
-		getProdukts().remove(produkt);
-		produkt.setTag(null);
-
-		return produkt;
 	}
 
 }

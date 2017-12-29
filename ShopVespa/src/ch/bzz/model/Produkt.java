@@ -16,8 +16,8 @@ public class Produkt implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idProdukte;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idProdukt;
 
 	@Column(name="ArtikelNr")
 	private String artikelNr;
@@ -28,24 +28,24 @@ public class Produkt implements Serializable {
 	@Column(name="Bezeichnung")
 	private String bezeichnung;
 
-	@Column(name="BildPfad")
-	private String bildPfad;
-
 	@Column(name="Lagerbestand")
 	private int lagerbestand;
 
 	@Column(name="Preis")
 	private float preis;
 
+	//bi-directional many-to-one association to Bild
+	@OneToMany(mappedBy="produkt")
+	private List<Bild> bilds;
+
 	//bi-directional many-to-one association to Kategorie
 	@ManyToOne
 	@JoinColumn(name="KategorieID")
 	private Kategorie kategorie;
 
-	//bi-directional many-to-one association to Tag
-	@ManyToOne
-	@JoinColumn(name="TagsID")
-	private Tag tag;
+	//bi-directional many-to-many association to Tag
+	@ManyToMany(mappedBy="produkts")
+	private List<Tag> tags;
 
 	//bi-directional many-to-many association to Bestellung
 	@ManyToMany
@@ -63,12 +63,12 @@ public class Produkt implements Serializable {
 	public Produkt() {
 	}
 
-	public int getIdProdukte() {
-		return this.idProdukte;
+	public int getIdProdukt() {
+		return this.idProdukt;
 	}
 
-	public void setIdProdukte(int idProdukte) {
-		this.idProdukte = idProdukte;
+	public void setIdProdukt(int idProdukt) {
+		this.idProdukt = idProdukt;
 	}
 
 	public String getArtikelNr() {
@@ -95,14 +95,6 @@ public class Produkt implements Serializable {
 		this.bezeichnung = bezeichnung;
 	}
 
-	public String getBildPfad() {
-		return this.bildPfad;
-	}
-
-	public void setBildPfad(String bildPfad) {
-		this.bildPfad = bildPfad;
-	}
-
 	public int getLagerbestand() {
 		return this.lagerbestand;
 	}
@@ -119,6 +111,28 @@ public class Produkt implements Serializable {
 		this.preis = preis;
 	}
 
+	public List<Bild> getBilds() {
+		return this.bilds;
+	}
+
+	public void setBilds(List<Bild> bilds) {
+		this.bilds = bilds;
+	}
+
+	public Bild addBild(Bild bild) {
+		getBilds().add(bild);
+		bild.setProdukt(this);
+
+		return bild;
+	}
+
+	public Bild removeBild(Bild bild) {
+		getBilds().remove(bild);
+		bild.setProdukt(null);
+
+		return bild;
+	}
+
 	public Kategorie getKategorie() {
 		return this.kategorie;
 	}
@@ -127,13 +141,12 @@ public class Produkt implements Serializable {
 		this.kategorie = kategorie;
 	}
 
-
-	public Tag getTag() {
-		return this.tag;
+	public List<Tag> getTags() {
+		return this.tags;
 	}
 
-	public void setTag(Tag tag) {
-		this.tag = tag;
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 
 	public List<Bestellung> getBestellungs() {
