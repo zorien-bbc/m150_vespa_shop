@@ -1,5 +1,10 @@
 package ch.bzz.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +12,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 
 import ch.bzz.model.Kategorie;
 import ch.bzz.model.Produkt;
@@ -22,6 +30,8 @@ public class AdminController {
 	private Produkt produkt;
 	private String kat;
 	private List<String> kategorien;
+	private List<Part> bilder;
+	private OutputStream outputStream;
 
 	@EJB
 	private ProduktService produktservice;
@@ -47,7 +57,31 @@ public class AdminController {
 		produktservice.addProdukt(produkt);
 		produkt = new Produkt();
 		lager = produktservice.collectAll();
+		savePictures();
 		return null;
+	}
+	
+	private void savePictures(){
+		int number = 0;
+		for(Part part : bilder){
+			try {
+				InputStream inputStream = part.getInputStream();
+				ServletContext servletContext = (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
+				String path = servletContext.getRealPath("resources/productImages");
+				outputStream = new FileOutputStream(new File(path+"/"+produkt.getArtikelNr()+"_"+number+".png"));
+				int read = 0;
+				byte[] bytes = new byte[1024];
+
+				while ((read = inputStream.read(bytes)) != -1) {
+					outputStream.write(bytes, 0, read);
+				}
+				outputStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			number++;
+		}
 	}
 
 	public List<Produkt> getLager() {
@@ -82,4 +116,11 @@ public class AdminController {
 		this.kategorien = kategorien;
 	}
 
+	public List<Part> getBilder() {
+		return bilder;
+	}
+
+	public void setBilder(List<Part> bilder) {
+		this.bilder = bilder;
+	}
 }
