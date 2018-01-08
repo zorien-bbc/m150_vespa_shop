@@ -11,9 +11,59 @@
 <h:body>
 	<ui:composition template="template/layout.xhtml">
 		<ui:define name="content">
-			<h1>#{detailController.produkt.bezeichnung}</h1>
-		</ui:define>
 
+			<div id="detailcontent" class="row">
+				<div id="demo" class="carousel slide col-lg-5" data-ride="carousel">
+
+					<!-- Indicators -->
+					<ul class="carousel-indicators">
+						<li data-target="#demo" data-slide-to="0" class="active"></li>
+						<li data-target="#demo" data-slide-to="1"></li>
+						<li data-target="#demo" data-slide-to="2"></li>
+					</ul>
+
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="http://via.placeholder.com/320x300" alt="Los Angeles"></img>
+						</div>
+						<div class="carousel-item">
+							<img src="http://via.placeholder.com/320x300" alt="Chicago"></img>
+						</div>
+						<div class="carousel-item">
+							<img src="http://via.placeholder.com/320x300" alt="New York"></img>
+						</div>
+					</div>
+
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a> <a class="carousel-control-next" href="#demo" data-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</a>
+				</div>
+				<div id="productinfo" class="col-lg-4">
+					<h1>#{detailController.produkt.bezeichnung}</h1>
+					<hr></hr>
+					<p>#{detailController.produkt.beschreibung}</p>
+					<hr></hr>
+					<p>#{detailController.produkt.kategorie.name}</p>
+					<hr></hr>
+					<ui:repeat var="tag" value="#{detailController.produkt.tags}">
+						<p>#{tag.name}</p>
+					</ui:repeat>
+				</div>
+				<div id="productdetail" class="col-lg-3" style="border-left: 1px solid #E5E5E5;">
+					<h6 style="float: left; margin-top: 11.5px;">CHF</h6>
+					<h3 style="color: red;">#{detailController.produkt.preis}</h3>
+					<p>Artikel NR: #{detailController.produkt.artikelNr}</p>
+					<p>Noch #{detailController.produkt.lagerbestand} an Lager</p>
+					<button class="btn btn-primary">Add to warenkorb</button>
+				</div>
+			</div>
+
+
+		</ui:define>
 	</ui:composition>
 </h:body>
 </html>
