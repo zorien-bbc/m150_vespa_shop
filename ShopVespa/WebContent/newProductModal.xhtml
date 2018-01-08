@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
 
 <h:body>
 	<ui:composition>
@@ -23,7 +25,7 @@
 
 						<div class="form-inline">
 							<fieldset>
-								<h:form name="newProductForm">
+								<h:form name="newProductForm" enctype="multipart/form-data">
 
 									<!-- Text input-->
 									<div class="form-group">
@@ -108,11 +110,13 @@
 									<!-- 									<div class="form-group"> -->
 									<!-- 										<label class="col-md-4 control-label" for="bildpfad">Bild -->
 									<!-- 											Pfad</label> -->
-									<!-- 										<div class="col-md-4"> -->
-									<!-- 											<input id="bildpfad" name="bildpfad" class="input-file" -->
-									<!-- 												type="file"></input> -->
-									<!-- 										</div> -->
+<!-- 																			<div class="col-md-4"> -->
+<!-- 																				<h:inputFile id="bildpfad" name="bildpfad" class="input-file" -->
+<!-- 																					type="file" value="#{adminController.bilder}"></h:inputFile> -->
+<!-- 																			</div> -->
 									<!-- 									</div> -->
+									<o:inputFile value="#{adminController.bilder}" multiple="true" />
+									
 									<h:messages></h:messages>
 
 									<h:commandButton action="#{adminController.addProdukt}"
@@ -121,15 +125,7 @@
 								</h:form>
 							</fieldset>
 						</div>
-
 					</div>
-
-
-
-
-
-
-
 				</div>
 			</div>
 		</div>
