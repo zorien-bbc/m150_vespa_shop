@@ -7,13 +7,14 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import ch.bzz.model.Kategorie;
 import ch.bzz.model.Produkt;
 import ch.bzz.service.IndexService;
 
 @ManagedBean(name = "indexController")
-@SessionScoped
+@ViewScoped
 public class IndexController {
 
 	private List<Kategorie> kategorien = new ArrayList<Kategorie>();
