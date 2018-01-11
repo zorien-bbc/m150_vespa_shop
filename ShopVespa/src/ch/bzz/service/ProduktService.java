@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import ch.bzz.model.Bestellung;
 import ch.bzz.model.Kategorie;
 import ch.bzz.model.Produkt;
 import ch.bzz.model.Tag;
@@ -48,6 +49,13 @@ public class ProduktService {
 		TypedQuery<Kategorie> query = em.createQuery("SELECT k FROM Kategorie k WHERE k.name = :name", Kategorie.class);
 		Kategorie kat= (Kategorie) query.setParameter("name", kategoriename).getSingleResult();
 		return kat.getProdukts();
+	}
+	
+	public void addToWarenkorb(Produkt pro, Bestellung bes) {
+		Query query = em.createNativeQuery("INSERT INTO warenkorb (`Bestellung_idBestellung`, `Produkt_idProdukte`) VALUES (?, ?)");
+		query.setParameter(1, bes.getIdBestellung());
+		query.setParameter(2, pro.getIdProdukt());
+		query.executeUpdate();
 	}
 
 }

@@ -1,28 +1,51 @@
 package ch.bzz.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import ch.bzz.model.Bestellung;
+import ch.bzz.model.Kunde;
 import ch.bzz.model.Produkt;
+import ch.bzz.service.LoginService;
 import ch.bzz.service.ProduktService;
+import ch.bzz.util.SessionUtils;
 
 @ViewScoped
 @ManagedBean
 public class DetailController {
 	private int produktId;
 	private Produkt produkt;
+	List<Produkt> list;
+
 	@EJB
 	ProduktService produktservice;
+	@EJB
+	LoginService loginService;
 
 	public void init() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		HttpServletRequest req = SessionUtils.getRequest();
 		produktId = Integer.valueOf(req.getParameter("id"));
 		System.out.println(produktId);
 		produkt = produktservice.find(produktId);
+	}
+
+	public String addToWarenkorb() {
+		Kunde user = loginService.getUser(SessionUtils.getUserName());
+		Bestellung bs = new Bestellung();
+		bs.setBestelldatum(new Date().toString());
+		ArrayList<Produkt> ps = new ArrayList<Produkt>();
+		ps.add(produkt);
+		bs.setProdukts(ps);
+		user.addBestellung(bs);
+		loginService.persist(bs);
+		produktservice.addToWarenkorb(produkt, bs);
+		return null;
 	}
 
 	public int getProduktId() {
@@ -39,6 +62,14 @@ public class DetailController {
 
 	public void setProdukt(Produkt produkt) {
 		this.produkt = produkt;
+	}
+
+	public List<Produkt> getList() {
+		return list;
+	}
+
+	public void setList(List<Produkt> list) {
+		this.list = list;
 	}
 
 }

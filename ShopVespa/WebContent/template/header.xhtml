@@ -24,20 +24,40 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<div class="collapse navbar-collapse"
-				id="navbarSupportedContent">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto right-icons">
-					<li class="nav-item"><a class="nav-link" href="#">
-					<i class="ion-ios-person-outline icons"></i>
+					<li class="nav-item"><a class="nav-link" href="#"> <i
+							class="ion-ios-cart-outline icons"></i>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">
-					<i	class="ion-ios-cart-outline icons"></i>
-					</a></li>
+
+					<ui:fragment rendered="#{empty username}">
+						<li class="nav-item"><a class="nav-link" data-toggle="modal"
+							data-target="#loginModal" href="#loginModal"> <i
+								class="ion-ios-person-outline icons"></i>
+						</a></li>
+					</ui:fragment>
+					
+					<ui:fragment rendered="#{not empty username}">
+						<li class="nav-item" ><a class="nav-link" href="profile.xhtml"> <i
+								class="ion-ios-person icons"></i>
+						</a></li>
+						<h:form>
+							<li class="nav-item" style="margin-top: 4px;">
+							<h:commandLink styleClass="nav-link"
+									action="#{loginController.logout}">
+									<i class="ion-log-out icons" style="font-size:19px;"></i>
+								</h:commandLink></li>
+						</h:form>
+					</ui:fragment>
+
+
 				</ul>
 
 			</div>
 		</div>
 		</nav>
+		<ui:include src="../loginModal.xhtml"></ui:include>
+
 	</ui:composition>
 </h:body>
 </html>

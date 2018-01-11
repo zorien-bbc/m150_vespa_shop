@@ -29,4 +29,9 @@ public class IndexService {
 		return produkte;
 	}
 
+	public List<Produkt> test() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -44,7 +44,7 @@ public class Kunde implements Serializable {
 	private String vorname;
 
 	//bi-directional many-to-one association to Bestellung
-	@OneToMany(mappedBy="kunde")
+	@OneToMany(mappedBy="kunde",cascade = CascadeType.PERSIST)
 	private List<Bestellung> bestellungs;
 
 	public Kunde() {

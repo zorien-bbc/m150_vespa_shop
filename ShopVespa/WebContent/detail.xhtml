@@ -13,13 +13,14 @@
 		<ui:define name="content">
 
 			<div id="detailcontent" class="row">
-				<div id="demo" class="carousel slide col-lg-5" data-ride="carousel">
+				<div id="productpicture" class="carousel slide col-lg-5"
+					data-ride="carousel">
 
 					<!-- Indicators -->
 					<ul class="carousel-indicators">
-						<li data-target="#demo" data-slide-to="0" class="active"></li>
-						<li data-target="#demo" data-slide-to="1"></li>
-						<li data-target="#demo" data-slide-to="2"></li>
+						<li data-target="#productpicture" data-slide-to="0" class="active"></li>
+						<li data-target="#productpicture" data-slide-to="1"></li>
+						<li data-target="#productpicture" data-slide-to="2"></li>
 					</ul>
 
 					<!-- The slideshow -->
@@ -34,12 +35,11 @@
 							<img src="http://via.placeholder.com/320x300" alt="New York"></img>
 						</div>
 					</div>
-
 					<!-- Left and right controls -->
-					<a class="carousel-control-prev" href="#demo" data-slide="prev">
-						<span class="carousel-control-prev-icon"></span>
-					</a> <a class="carousel-control-next" href="#demo" data-slide="next">
-						<span class="carousel-control-next-icon"></span>
+					<a class="carousel-control-prev" href="#productpicture"
+						data-slide="prev"> <span class="carousel-control-prev-icon"></span>
+					</a> <a class="carousel-control-next" href="#productpicture"
+						data-slide="next"> <span class="carousel-control-next-icon"></span>
 					</a>
 				</div>
 				<div id="productinfo" class="col-lg-4">
@@ -53,16 +53,22 @@
 						<p>#{tag.name}</p>
 					</ui:repeat>
 				</div>
-				<div id="productdetail" class="col-lg-3" style="border-left: 1px solid #E5E5E5;">
+				<div id="productdetail" class="col-lg-3"
+					style="border-left: 1px solid #E5E5E5;">
 					<h6 style="float: left; margin-top: 11.5px;">CHF</h6>
 					<h3 style="color: red;">#{detailController.produkt.preis}</h3>
 					<p>Artikel NR: #{detailController.produkt.artikelNr}</p>
 					<p>Noch #{detailController.produkt.lagerbestand} an Lager</p>
-					<button class="btn btn-success">in den Warenkorb <i style="font-size:17px;" class="ion-ios-cart-outline icons"></i></button>
+					<h:form>
+						<h:commandLink action="#{detailController.addToWarenkorb()}"
+							class="btn btn-success">in den Warenkorb <i
+								style="font-size: 17px;" class="ion-ios-cart-outline icons"></i>
+						</h:commandLink>
+					</h:form>
 				</div>
 			</div>
 
-
+	<ui:repeat var="produkte" value="#{detailController.list}">#{produkte.bezeichnung}</ui:repeat>
 		</ui:define>
 	</ui:composition>
 </h:body>
