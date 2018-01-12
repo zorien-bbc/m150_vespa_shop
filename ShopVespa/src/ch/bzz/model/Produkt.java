@@ -35,7 +35,7 @@ public class Produkt implements Serializable {
 	private float preis;
 
 	//bi-directional many-to-one association to Bild
-	@OneToMany(mappedBy="produkt")
+	@OneToMany(mappedBy="produkt", cascade=CascadeType.PERSIST)
 	private List<Bild> bilds;
 
 	//bi-directional many-to-one association to Kategorie
