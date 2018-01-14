@@ -35,13 +35,13 @@
 					<div class="col-md-offset-1 col-md-3 productitem"
 						style="margin: 20px;">
 						<h:form name="saveForm">
-							<img src="http://via.placeholder.com/150x150" alt="New York"></img>
+							<img src="#{produkt.bilds[0].pfad}" alt="New York" style="width: 201px;height:150px;"></img>
 							<p style="color: red;">#{produkt.preis}</p>
 							<p style="margin-top: -18px">#{produkt.bezeichnung}</p>
 							<div class="form-inline">
 								<div class="form-group  mb-2">
 									<h:outputLabel for="inputPassword2">Lagerbestand</h:outputLabel>
-									<h:inputText style="width: 100%" type="number" min="0"
+									<h:inputText style="width: 80%" type="number" min="0"
 										class="form-control" id="inputPassword2"
 										value="#{produkt.lagerbestand}"></h:inputText>
 								</div>
