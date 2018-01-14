@@ -11,7 +11,7 @@
 <h:body>
 	<ui:composition>
 		<!-- Modal -->
-		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" 
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 			aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -36,8 +36,10 @@
 											class="form-control"></h:inputSecret>
 										<h:message for="password"></h:message>
 
-										<h:commandButton style="margin-top:15px;" class="btn btn-success"
-											action="#{loginController.login}" value="Login"></h:commandButton>
+										<a data-toggle="modal" data-dismiss="modal" href="#registerModal" style="float:left">Noch kein Konto? Registrieren</a>
+										<h:commandButton style="margin-top:15px;"
+											class="btn btn-success" action="#{loginController.login}"
+											value="Login"></h:commandButton>
 									</div>
 								</div>
 							</h:form>

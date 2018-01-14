@@ -70,7 +70,7 @@ public class ProduktService {
 	public List<Produkt> findProductsWithKat(String kategoriename) {
 		System.out.println(kategoriename);
 		TypedQuery<Kategorie> query = em.createQuery("SELECT k FROM Kategorie k WHERE k.name = :name", Kategorie.class);
-		Kategorie kat =  query.setParameter("name", kategoriename).getSingleResult();
+		Kategorie kat = query.setParameter("name", kategoriename).getSingleResult();
 		return kat.getProdukts();
 	}
 
@@ -93,9 +93,8 @@ public class ProduktService {
 	public Bestellung getLatestBestellung(Kunde user) {
 		Bestellung bestellung = new Bestellung();
 		System.out.println(user.getIdKunde());
-		Query query = em.createNativeQuery("Select * from Bestellung where KundeID = ? and Status = 'Offen'",
-				Bestellung.class);
-		query.setParameter(1, user.getIdKunde());
+		Query query = em.createNamedQuery("Bestellung.latest", Bestellung.class);
+		query.setParameter("kunde", user);
 		try {
 			Bestellung kundenBestellungen = (Bestellung) query.getSingleResult();
 			return kundenBestellungen;
@@ -109,14 +108,11 @@ public class ProduktService {
 	}
 
 	public List<Bestellung> getAllFromKunde(Kunde user) {
-		List<Bestellung> kundenBestellungen = em.createNamedQuery("Bestellung.findAll", Bestellung.class)
-				.getResultList();
-		for (Bestellung b : kundenBestellungen) {
-			if (b.getKunde().getIdKunde() == user.getIdKunde()) {
-				return kundenBestellungen;
-			}
-		}
-		return null;
+		Query query = em.createNamedQuery("Bestellung.userBestellungen", Bestellung.class);
+		query.setParameter("kunde", user);
+		List<Bestellung> kundenBestellungen = query.getResultList();
+
+		return kundenBestellungen;
 
 	}
 

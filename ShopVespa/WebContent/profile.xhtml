@@ -10,8 +10,6 @@
 	<ui:composition template="template/layout.xhtml">
 		<ui:define name="content">
 			<h:form>
-				<h:commandButton action="#{profileController.update}" value="Update"
-					update="@form"></h:commandButton>
 				<ui:repeat var="bestellung"
 					value="#{profileController.meineBestellungen}">
 					<div class="card card-default" style="margin-bottom: 10px">

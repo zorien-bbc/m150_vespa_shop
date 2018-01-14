@@ -37,16 +37,6 @@ public class ProfileController {
 
 	}
 
-	public String update() {
-		setMeineBestellungen(produktService.getAllFromKunde(user));
-		List<Bestellung> bs = produktService.getAllFromKunde(user);
-		for (Bestellung b : bs) {
-			for (Produkt p : b.getProdukts()) {
-				System.out.println(p.getBezeichnung());
-			}
-		}
-		return null;
-	}
 
 	public List<Bestellung> getMeineBestellungen() {
 		return meineBestellungen;

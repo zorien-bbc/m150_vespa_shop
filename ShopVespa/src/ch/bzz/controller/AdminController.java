@@ -78,6 +78,10 @@ public class AdminController {
 		return null;
 	}
 
+	public String save() {
+		return null;
+	}
+
 	private void addProduktTagsRecords() {
 		for (String t : tags) {
 			produktservice.addToProduktTag(produkt, produktservice.collectTagByName(t));

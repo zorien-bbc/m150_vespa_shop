@@ -10,10 +10,8 @@ body {
 .footer {
 	border-top: .05rem solid #e5e5e5;
 	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
 	text-align: center;
+	margin-top: 15px
 }
 
 .icons {
@@ -26,9 +24,24 @@ body {
 	border-radius: 7px;
 	padding: 5px;
 }
-.price{
-	color:red;
+
+.price {
+	color: red;
 }
-.right-icons{
-	margin-left:84%;
+
+.right-icons {
+	margin-left: 80%;
+}
+
+.chip {
+	display: inline-block;
+	padding: 0 25px;
+	height: 50px;
+	font-size: 16px;
+	line-height: 50px;
+	border-radius: 25px;
+	background-color: #f1f1f1;
+}
+.formseparator{
+	margin-bottom: 15px !Important;
 }

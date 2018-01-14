@@ -23,9 +23,9 @@ public class IndexService {
 
 	public List<Produkt> collectFeaturedProdukte() {
 		List<Produkt> produkte = em.createNamedQuery("Produkt.findAll", Produkt.class).getResultList();
-//		while(produkte.size()>6) {
-//			produkte.remove(1);
-//		}
+		while (produkte.size() > 6) {
+			produkte.remove(1);
+		}
 		return produkte;
 	}
 

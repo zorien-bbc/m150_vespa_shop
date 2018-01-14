@@ -47,7 +47,7 @@ public class WarenkorbController {
 	public String checkout() {
 		warenkorb.setBestelldatum(new Date().toString());
 		checkoutService.checkout(warenkorb);
-		return null;
+		return "profile";
 	}
 
 	public Bestellung getWarenkorb() {

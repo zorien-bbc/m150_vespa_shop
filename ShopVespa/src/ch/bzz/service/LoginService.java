@@ -32,6 +32,10 @@ public class LoginService {
 
 	public void persist(Bestellung bestellung) {
 		em.persist(bestellung);
-		
+
+	}
+
+	public void register(Kunde registerUser) {
+		em.persist(registerUser);
 	}
 }

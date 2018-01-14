@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <f:metadata>
 	<f:viewAction action="#{detailController.init}"></f:viewAction>
@@ -50,7 +51,7 @@
 					<p>#{detailController.produkt.kategorie.name}</p>
 					<hr></hr>
 					<ui:repeat var="tag" value="#{detailController.produkt.tags}">
-						<p>#{tag.name}</p>
+						<p id="#{tag.name}" class="chip">#{tag.name}</p>
 					</ui:repeat>
 				</div>
 				<div id="productdetail" class="col-lg-3"
@@ -59,16 +60,20 @@
 					<h3 style="color: red;">#{detailController.produkt.preis}</h3>
 					<p>Artikel NR: #{detailController.produkt.artikelNr}</p>
 					<p>Noch #{detailController.produkt.lagerbestand} an Lager</p>
-					<h:form>
-						<h:commandLink action="#{detailController.addToWarenkorb()}"
-							class="btn btn-success">in den Warenkorb <i
-								style="font-size: 17px;" class="ion-ios-cart-outline icons"></i>
-						</h:commandLink>
-					</h:form>
+					<c:if test="#{detailController.produkt.lagerbestand>0}">
+						<h:form>
+							<h:commandLink action="#{detailController.addToWarenkorb()}"
+								class="btn btn-success">in den Warenkorb <i
+									style="font-size: 17px;" class="ion-ios-cart-outline icons"></i>
+							</h:commandLink>
+						</h:form>
+					</c:if>
+					<c:if test="#{detailController.produkt.lagerbestand==0}">
+					<p class="price">Dieses Produkt ist vorübergehend nicht mehr verfügbar</p></c:if>
 				</div>
 			</div>
 
-	<ui:repeat var="produkte" value="#{detailController.list}">#{produkte.bezeichnung}</ui:repeat>
+			<ui:repeat var="produkte" value="#{detailController.list}">#{produkte.bezeichnung}</ui:repeat>
 		</ui:define>
 	</ui:composition>
 </h:body>

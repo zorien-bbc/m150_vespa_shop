@@ -31,10 +31,12 @@
 						<p style="font-size: 11px;">#{produkt.kategorie.name}</p>
 						<f:param name="kategorie" value="#{produkt.kategorie.name}"></f:param>
 					</h:link>
-
-					<i
-						style="float: right; margin-top: 40px; margin-right: -35px; font-size: 22px;"
-						class="ion-ios-cart-outline icons"></i>
+					<h:link outcome="detail" class="float-right">
+						<i
+							style="float: right; margin-top: 40px; margin-right: -35px; font-size: 22px;"
+							class="ion-ios-cart-outline icons"></i>
+						<f:param name="id" value="#{produkt.idProdukt}"></f:param>
+					</h:link>
 				</div>
 			</ui:repeat>
 

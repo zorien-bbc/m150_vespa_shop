@@ -14,8 +14,7 @@
 
 			<h:form class="form-inline my-2 my-lg-0 ">
 				<h:inputText id="search" name="search" class="form-control"
-					placeholder="Search"
-					value="#{searchController.searchString}">
+					placeholder="Search" value="#{searchController.searchString}">
 				</h:inputText>
 				<h:commandButton action="#{searchController.redirect}"
 					class="btn btn-outline-success my-2 my-sm-0" value="Search">
@@ -30,20 +29,22 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto right-icons">
-					<li class="nav-item"><a class="nav-link" href="cart.xhtml"> <i
-							class="ion-ios-cart-outline icons"></i>
-					</a></li>
 
 					<ui:fragment rendered="#{empty username}">
 						<li class="nav-item"><a class="nav-link" data-toggle="modal"
-							data-target="#loginModal" href="#loginModal"> <i
-								class="ion-ios-person-outline icons"></i>
-						</a></li>
+							data-target="#loginModal" href="#loginModal"><p
+									style="float: left; margin-top: 6px">Anmelden</p> <i
+								class="ion-ios-person-outline icons"></i> </a></li>
 					</ui:fragment>
 
 					<ui:fragment rendered="#{not empty username}">
-						<li class="nav-item"><a class="nav-link"
-							href="profile.xhtml"> <i class="ion-ios-person icons"></i>
+						<li class="nav-item"><a class="nav-link" href="profile.xhtml"><p
+									style="float: left; margin-top: 5px;">#{username}</p> <i
+								class="ion-ios-person icons"
+								style="float: left;"></i>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="cart.xhtml">
+								<i class="ion-ios-cart-outline icons"></i>
 						</a></li>
 						<h:form>
 							<li class="nav-item" style="margin-top: 4px;"><h:commandLink

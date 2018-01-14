@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:body>
+	<ui:composition>
+		<!-- Modal -->
+		<div class="modal fade" id="checkout" tabindex="-1" role="dialog"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Ihren Warenkorb verbindlich kaufen
+						<fieldset>
+							<h:form name="checkoutForm">
+								<h:commandButton action="#{warenkorbController.checkout}"
+									value="Checkout" class="btn btn-primary float-right"
+									></h:commandButton>
+							</h:form>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>
