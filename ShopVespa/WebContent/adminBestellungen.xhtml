@@ -27,10 +27,50 @@
 							Bestellt am #{bestellung.bestelldatum}
 							<p class="float-right">#{bestellung.status}</p>
 						</div>
-						<div class="card-body">
-							<ui:repeat var="produkt" value="#{bestellung.produkts}">#{produkt.bezeichnung} #{produkt.preis}<br></br>
+						<div>
+							<div class="card-body" style="float: left;">
+								<ui:repeat var="produkt" value="#{bestellung.produkts}">#{produkt.bezeichnung} #{produkt.preis}<br></br>
 
-							</ui:repeat>
+								</ui:repeat>
+
+							</div>
+							<a class="nav-link" style="float: right;" data-toggle="modal"
+								data-target="#lieferscheinModal#{bestellung.idBestellung}"
+								href="#lieferscheinModal#{bestellung.idBestellung}"> <i
+								class="ion-document-text icons"></i>
+							</a>
+						</div>
+					</div>
+					<div class="modal fade"
+						id="lieferscheinModal#{bestellung.idBestellung}" tabindex="-1"
+						role="dialog" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Lieferschein</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<h:outputText value="Bestelldatum:" />
+										<h:outputText value="#{bestellung.bestelldatum}" />
+									</div>
+									<div class="form-group">
+										<h:outputText value="Kunde: " />
+										<h:outputText value="#{bestellung.kunde.vorname}"/>
+									</div>
+									<div class="form-group">
+										<h:outputText value="Status: " />
+										<h:outputText id="status" value="#{bestellung.status}" />
+									</div>
+									<b>Produkte</b>
+									<hr/>
+									<ui:repeat var="produkt" value="#{bestellung.produkts}">
+										#{produkt.bezeichnung}: #{produkt.preis}<br></br>
+									</ui:repeat>
+								</div>
+							</div>
 						</div>
 					</div>
 				</ui:repeat>
