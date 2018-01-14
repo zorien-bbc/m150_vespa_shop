@@ -33,10 +33,30 @@ public class ProduktService {
 				.setParameter("name", katname).getSingleResult();
 	}
 
+	public List<Produkt> searchProdukte(String value) {
+		List<Produkt> produkte = em.createNamedQuery("Produkt.searchProduktBy", Produkt.class)
+				.setParameter("wert", "%" + value + "%").getResultList();
+		return produkte;
+	}
+
 	public void addProdukt(Produkt produkt) {
 		System.out.println("test");
 		em.persist(produkt);
 
+	}
+
+	public void addTag(Tag tag) {
+		em.persist(tag);
+	}
+
+	public Tag collectTagByName(String value) {
+		try {
+			Tag tag = em.createNamedQuery("Tag.searchTagByName", Tag.class).setParameter("name", value)
+					.getSingleResult();
+			return tag;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public Tag collectTag(int i) {
@@ -47,12 +67,20 @@ public class ProduktService {
 	public List<Produkt> findProductsWithKat(String kategoriename) {
 		System.out.println(kategoriename);
 		TypedQuery<Kategorie> query = em.createQuery("SELECT k FROM Kategorie k WHERE k.name = :name", Kategorie.class);
-		Kategorie kat= (Kategorie) query.setParameter("name", kategoriename).getSingleResult();
+		Kategorie kat = (Kategorie) query.setParameter("name", kategoriename).getSingleResult();
 		return kat.getProdukts();
 	}
-	
+
+	public void addToProduktTag(Produkt pro, Tag t) {
+		Query query = em.createNativeQuery(
+				"INSERT INTO tags_has_produkt (`Tags_idTags`, `Produkt_idProdukte`) VALUES (?, ?)");
+		query.setParameter(1, t.getIdTags());
+		query.setParameter(2, pro.getIdProdukt());
+		query.executeUpdate();
+	}
 	public void addToWarenkorb(Produkt pro, Bestellung bes) {
-		Query query = em.createNativeQuery("INSERT INTO warenkorb (`Bestellung_idBestellung`, `Produkt_idProdukte`) VALUES (?, ?)");
+		Query query = em.createNativeQuery(
+				"INSERT INTO warenkorb (`Bestellung_idBestellung`, `Produkt_idProdukte`) VALUES (?, ?)");
 		query.setParameter(1, bes.getIdBestellung());
 		query.setParameter(2, pro.getIdProdukt());
 		query.executeUpdate();

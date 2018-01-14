@@ -17,16 +17,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Users/zorien/.m2/repository/org/omnifaces/omnifaces/2.6.8/omnifaces-2.6.8.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.archivename" value="omnifaces-2.6.8.jar"/>
-			<attribute name="maven.groupId" value="org.omnifaces"/>
-			<attribute name="maven.artifactId" value="omnifaces"/>
-			<attribute name="maven.version" value="2.6.8"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

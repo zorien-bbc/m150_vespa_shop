@@ -57,16 +57,24 @@
 			</ui:insert>
 		</div>
 		<script type="text/javascript">
-		 
-		$(document).ready(function(){ 
-			$('#item-1').on('show.bs.collapse',function() {
-					$(".ion-plus-round").removeClass("ion-plus-round").addClass("ion-minus-round");
-			});
-					
-			$('#item-1').on('hide.bs.collapse',function() {
-					$(".ion-minus-round").removeClass("ion-minus-round").addClass("ion-plus-round");
-			});
-		});
+			$(document).ready(
+					function() {
+						$('#item-1').on(
+								'show.bs.collapse',
+								function() {
+									$(".ion-plus-round").removeClass(
+											"ion-plus-round").addClass(
+											"ion-minus-round");
+								});
+
+						$('#item-1').on(
+								'hide.bs.collapse',
+								function() {
+									$(".ion-minus-round").removeClass(
+											"ion-minus-round").addClass(
+											"ion-plus-round");
+								});
+					});
 		</script>
 	</div>
 </h:body>
