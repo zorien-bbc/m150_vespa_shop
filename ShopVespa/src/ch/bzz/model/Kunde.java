@@ -42,6 +42,9 @@ public class Kunde implements Serializable {
 
 	@Column(name="Vorname")
 	private String vorname;
+	
+	@Column(name="isAdmin")
+	private Boolean isAdmin;
 
 	//bi-directional many-to-one association to Bestellung
 	@OneToMany(mappedBy="kunde",cascade = CascadeType.PERSIST)

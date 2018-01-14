@@ -50,10 +50,10 @@
 							</h:link>
 							<p style="color: red;">#{produkt.preis}</p>
 							<p style="margin-top: -18px">#{produkt.bezeichnung}</p>
-							<h:commandLink style="margin-top:-15px"
-								styleClass="btn btn-primary" value="Kaufen ">
-								<i class="ion-ios-cart-outline icons" style="font-size: 15px"></i>
-							</h:commandLink>
+							<h:link style="margin-top:-15px"
+								styleClass="btn btn-primary" value="Details" outcome="detail">
+								<f:param name="id" value="#{produkt.idProdukt}"></f:param>
+							</h:link>
 						</div>
 					</ui:repeat>
 				</div>

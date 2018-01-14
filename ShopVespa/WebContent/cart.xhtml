@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:metadata>
+	<f:viewAction action="#{warenkorbController.init}"></f:viewAction>
+</f:metadata>
+
+<h:body>
+	<ui:composition template="template/layout.xhtml">
+		<ui:define name="content">
+			<h1>Warenkorb</h1>
+			<h:form>
+				<ui:repeat var="produkt"
+					value="#{warenkorbController.warenkorb.produkts}">
+					<div id="product" style="float: left; width: 100%;">
+						<hr></hr>
+						<h:link outcome="detail">
+							<img style="float: left;" src="http://via.placeholder.com/75x75"
+								alt="#{produkt.bezeichnung}"></img>
+							<f:param name="id" value="#{produkt.idProdukt}"></f:param>
+						</h:link>
+
+						<div id="productdetails"
+							style="float: left; width: 60%; margin-left: 10%;">
+							<p class="price">#{produkt.preis}</p>
+							<p>#{produkt.bezeichnung}</p>
+
+						</div>
+						<h:link outcome="list" class="float-right">
+							<p style="font-size: 11px;">#{produkt.kategorie.name}</p>
+							<f:param name="kategorie" value="#{produkt.kategorie.name}"></f:param>
+						</h:link>
+					</div>
+				</ui:repeat>
+				<br></br>
+				<p class="float-right price" style="margin-rigth: 15px;">#{warenkorbController.preis}</p>
+				<p class="float-right" style="margin-right: 10px">Total</p>
+				<br />
+				<h:commandButton action="#{warenkorbController.checkout}"
+					value="Checkout" class="btn btn-primary float-right"
+					style="margin-top: 30px;
+margin-right: -92px;"></h:commandButton>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

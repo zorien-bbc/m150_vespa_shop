@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Vespa Shop Admin</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1"></meta>
+	<link rel='stylesheet'
+		href='webjars/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'></link>
+	<link rel='stylesheet' href='resources/style.css'></link>
+	<link rel="stylesheet"
+		href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"></link>
+</h:head>
+
+<h:body>
+	<ui:include src="template/adminHeader.xhtml"></ui:include>
+
+	<div id="page">
+		<div class="container">
+			<div id="bestellungen" style="margin-top: 10px;">
+				<ui:repeat var="bestellung" value="#{adminController.bestellungen}">
+					<div class="card card-default" style="margin-bottom: 10px">
+						<div class="card-header">
+							Bestellt am #{bestellung.bestelldatum}
+							<p class="float-right">#{bestellung.status}</p>
+						</div>
+						<div class="card-body">
+							<ui:repeat var="produkt" value="#{bestellung.produkts}">#{produkt.bezeichnung} #{produkt.preis}<br></br>
+
+							</ui:repeat>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+		</div>
+
+	</div>
+	<ui:include src="template/footer.xhtml"></ui:include>
+</h:body>
+</html>

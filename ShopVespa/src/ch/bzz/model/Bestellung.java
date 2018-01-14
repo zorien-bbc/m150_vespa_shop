@@ -26,6 +26,17 @@ public class Bestellung implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="KundeID")
 	private Kunde kunde;
+	
+	@Column(name="Status")
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	//bi-directional many-to-many association to Produkt
 	@ManyToMany(mappedBy="bestellungs")

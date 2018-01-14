@@ -16,9 +16,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
+import ch.bzz.model.Bestellung;
 import ch.bzz.model.Kategorie;
 import ch.bzz.model.Produkt;
 import ch.bzz.model.Tag;
+import ch.bzz.service.CheckoutService;
 import ch.bzz.service.IndexService;
 import ch.bzz.service.ProduktService;
 
@@ -31,6 +33,7 @@ public class AdminController {
 	private String kat;
 	private List<String> kategorien;
 	private List<Part> bilder;
+	private List<Bestellung> bestellungen;
 	private OutputStream outputStream;
 
 	@EJB
@@ -38,10 +41,14 @@ public class AdminController {
 
 	@EJB
 	private IndexService indexService;
+	
+	@EJB 
+	private CheckoutService checkoutService;
 
 	@PostConstruct
 	public void init() {
 		lager = produktservice.collectAll();
+		bestellungen = checkoutService.collectAllBestellungen();
 		produkt = new Produkt();
 		kategorien = new ArrayList<String>();
 		for (Kategorie k : indexService.collectKategorien()) {
@@ -122,5 +129,13 @@ public class AdminController {
 
 	public void setBilder(List<Part> bilder) {
 		this.bilder = bilder;
+	}
+
+	public List<Bestellung> getBestellungen() {
+		return bestellungen;
+	}
+
+	public void setBestellungen(List<Bestellung> bestellungen) {
+		this.bestellungen = bestellungen;
 	}
 }

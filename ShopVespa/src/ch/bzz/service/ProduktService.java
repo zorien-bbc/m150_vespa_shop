@@ -1,7 +1,9 @@
 package ch.bzz.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import ch.bzz.model.Bestellung;
 import ch.bzz.model.Kategorie;
+import ch.bzz.model.Kunde;
 import ch.bzz.model.Produkt;
 import ch.bzz.model.Tag;
 
@@ -47,15 +50,61 @@ public class ProduktService {
 	public List<Produkt> findProductsWithKat(String kategoriename) {
 		System.out.println(kategoriename);
 		TypedQuery<Kategorie> query = em.createQuery("SELECT k FROM Kategorie k WHERE k.name = :name", Kategorie.class);
-		Kategorie kat= (Kategorie) query.setParameter("name", kategoriename).getSingleResult();
+		Kategorie kat = query.setParameter("name", kategoriename).getSingleResult();
 		return kat.getProdukts();
 	}
-	
+
 	public void addToWarenkorb(Produkt pro, Bestellung bes) {
-		Query query = em.createNativeQuery("INSERT INTO warenkorb (`Bestellung_idBestellung`, `Produkt_idProdukte`) VALUES (?, ?)");
+		Query query = em.createNativeQuery(
+				"INSERT INTO Warenkorb (`Bestellung_idBestellung`, `Produkt_idProdukte`) VALUES (?, ?)");
 		query.setParameter(1, bes.getIdBestellung());
 		query.setParameter(2, pro.getIdProdukt());
 		query.executeUpdate();
 	}
 
+	public Bestellung getLatestBestellung(Kunde user) {
+		Bestellung bestellung = new Bestellung();
+		System.out.println(user.getIdKunde());
+		Query query = em.createNativeQuery("Select * from Bestellung where KundeID = ? and Status = 'Offen'",
+				Bestellung.class);
+		query.setParameter(1, user.getIdKunde());
+		try {
+			Bestellung kundenBestellungen = (Bestellung) query.getSingleResult();
+			return kundenBestellungen;
+		} catch (Exception ex) {
+			bestellung.setKunde(user);
+			bestellung.setStatus("Offen");
+			bestellung.setProdukts(new ArrayList<Produkt>());
+			em.persist(bestellung);
+			return bestellung;
+		}
+	}
+
+	public List<Bestellung> getAllFromKunde(Kunde user) {
+		List<Bestellung> kundenBestellungen = em.createNamedQuery("Bestellung.findAll", Bestellung.class)
+				.getResultList();
+		for (Bestellung b : kundenBestellungen) {
+			if (b.getKunde().getIdKunde() == user.getIdKunde()) {
+				return kundenBestellungen;
+			}
+		}
+		return null;
+
+	}
+
+	public Bestellung getWarenkorb(Kunde user) {
+		List<Bestellung> bestellungen = em.createNamedQuery("Bestellung.findAll", Bestellung.class).getResultList();
+		for (Bestellung b : bestellungen) {
+			if (b.getStatus().equals("Offen")) {
+				em.refresh(b);
+				return b;
+			}
+		}
+		Bestellung bestellung = new Bestellung();
+		bestellung.setKunde(user);
+		bestellung.setStatus("Offen");
+		bestellung.setProdukts(new ArrayList<Produkt>());
+		em.persist(bestellung);
+		return bestellung;
+	}
 }

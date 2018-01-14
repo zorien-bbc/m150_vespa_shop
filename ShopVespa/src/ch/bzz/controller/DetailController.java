@@ -37,13 +37,10 @@ public class DetailController {
 
 	public String addToWarenkorb() {
 		Kunde user = loginService.getUser(SessionUtils.getUserName());
-		Bestellung bs = new Bestellung();
+		Bestellung bs = produktservice.getLatestBestellung(user);
 		bs.setBestelldatum(new Date().toString());
-		ArrayList<Produkt> ps = new ArrayList<Produkt>();
-		ps.add(produkt);
-		bs.setProdukts(ps);
+		bs.getProdukts().add(produkt);
 		user.addBestellung(bs);
-		loginService.persist(bs);
 		produktservice.addToWarenkorb(produkt, bs);
 		return null;
 	}
