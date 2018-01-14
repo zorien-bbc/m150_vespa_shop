@@ -4,35 +4,30 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the Tags database table.
  * 
  */
 @Entity
-@Table(name="Tags")
-@NamedQuery(name="Tag.findAll", query="SELECT t FROM Tag t")
+@Table(name = "Tags")
+@NamedQueries({
+		@NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t"),
+		@NamedQuery(name = "Tag.searchTagByName",query = "SELECT t FROM Tag t WHERE t.name = :name")
+})
 public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTags;
 
-	@Column(name="Name")
+	@Column(name = "Name")
 	private String name;
 
-	//bi-directional many-to-many association to Produkt
-	@ManyToMany
-	@JoinTable(
-		name="Tags_has_Produkt"
-		, joinColumns={
-			@JoinColumn(name="Tags_idTags")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Produkt_idProdukte")
-			}
-		)
+	// bi-directional many-to-many association to Produkt
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "Tags_has_Produkt", joinColumns = { @JoinColumn(name = "Tags_idTags") }, inverseJoinColumns = {
+			@JoinColumn(name = "Produkt_idProdukte") })
 	private List<Produkt> produkts;
 
 	public Tag() {

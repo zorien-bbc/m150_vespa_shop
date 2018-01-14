@@ -6,7 +6,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 	<ui:composition>
-		<div class="footer container">
+	<style>
+		#footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+}
+	</style>
+		<div id="footer" class="footer container">
 <!-- 			<p class="text-muted">© Maurizi's Vespas 2018</p> -->
 			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 				integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

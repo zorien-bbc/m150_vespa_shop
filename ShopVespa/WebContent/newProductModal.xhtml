@@ -6,8 +6,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:o="http://omnifaces.org/ui"
-	xmlns:of="http://omnifaces.org/functions">
-
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<ui:composition>
 		<!-- Modal -->
@@ -92,31 +92,19 @@
 										<div class="col-md-4">
 											<h:selectOneMenu class="form-control" id="kategorie"
 												value="#{adminController.kat}">
-												<f:selectItems value="#{adminController.kategorien}"/>
+												<f:selectItems value="#{adminController.kategorien}" />
 											</h:selectOneMenu>
 										</div>
 									</div>
-
-									<!-- 									Text input -->
-									<!-- 									<div class="form-group"> -->
-									<!-- 										<label class="col-md-4 control-label" for="tags">Tags</label> -->
-									<!-- 										<div class="col-md-4"> -->
-									<!-- 																						<h:inputText id="tags" name="tags" placeholder="" -->
-									<!-- 																							class="form-control input-md" required="true" type="text"></h:inputText> -->
-									<!-- 										</div> -->
-									<!-- 									</div> -->
-
-									<!-- 									File Button -->
-									<!-- 									<div class="form-group"> -->
-									<!-- 										<label class="col-md-4 control-label" for="bildpfad">Bild -->
-									<!-- 											Pfad</label> -->
-<!-- 																			<div class="col-md-4"> -->
-<!-- 																				<h:inputFile id="bildpfad" name="bildpfad" class="input-file" -->
-<!-- 																					type="file" value="#{adminController.bilder}"></h:inputFile> -->
-<!-- 																			</div> -->
-									<!-- 									</div> -->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="tags">Tags</label>
+										<div class="col-md-4" style="max-width:100px;">
+											<p:chips id="tags" style="max-width:90px;" value="#{adminController.tags}" />
+											<br />
+										</div>
+									</div>
 									<o:inputFile value="#{adminController.bilder}" multiple="true" />
-									
+
 									<h:messages></h:messages>
 
 									<h:commandButton action="#{adminController.addProdukt}"

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
 import ch.bzz.model.Bestellung;
+import ch.bzz.model.Bild;
 import ch.bzz.model.Kategorie;
 import ch.bzz.model.Produkt;
 import ch.bzz.model.Tag;
@@ -35,14 +37,16 @@ public class AdminController {
 	private List<Part> bilder;
 	private List<Bestellung> bestellungen;
 	private OutputStream outputStream;
+	private List<String> tags;
+	private static final String RootPath = "C:/glassfish-4.1.2/glassfish4/glassfish/domains/domain1/docroot/resources/images";
 
 	@EJB
 	private ProduktService produktservice;
 
 	@EJB
 	private IndexService indexService;
-	
-	@EJB 
+
+	@EJB
 	private CheckoutService checkoutService;
 
 	@PostConstruct
@@ -50,6 +54,8 @@ public class AdminController {
 		lager = produktservice.collectAll();
 		bestellungen = checkoutService.collectAllBestellungen();
 		produkt = new Produkt();
+		produkt.setBilds(new ArrayList<Bild>());
+		produkt.setTags(new ArrayList<Tag>());
 		kategorien = new ArrayList<String>();
 		for (Kategorie k : indexService.collectKategorien()) {
 			kategorien.add(k.getName());
@@ -58,24 +64,58 @@ public class AdminController {
 	}
 
 	public String addProdukt() {
-		Tag tag = new Tag();
-		tag.setName("test");
 		produkt.setKategorie(produktservice.find(kat));
+		Produkt prod = lager.get(lager.size() - 1);
+		savePictures(prod.getIdProdukt());
+		addTagsToProdukt();
 		produktservice.addProdukt(produkt);
+		addProduktTagsRecords();
 		produkt = new Produkt();
+		produkt.setBilds(new ArrayList<Bild>());
+		produkt.setTags(new ArrayList<Tag>());
+		tags = new ArrayList<String>();
 		lager = produktservice.collectAll();
-		savePictures();
 		return null;
 	}
-	
-	private void savePictures(){
+
+	private void addProduktTagsRecords() {
+		for (String t : tags) {
+			produktservice.addToProduktTag(produkt, produktservice.collectTagByName(t));
+		}
+	}
+
+	private void addTagsToProdukt() {
+		for (String t : tags) {
+			Tag tag = new Tag();
+			tag.setName(t);
+			if (checkIfTagExist(tag) == null) {
+				produkt.addTag(tag);
+			}
+		}
+	}
+
+	private Tag checkIfTagExist(Tag t) {
+		Tag tag = produktservice.collectTagByName(t.getName());
+		if (tag != null) {
+			tag.getProdukts().add(produkt);
+			produkt.addTag(tag);
+			return tag;
+		}
+		return null;
+	}
+
+	private void savePictures(int id) {
 		int number = 0;
-		for(Part part : bilder){
+		id++;
+		for (Part part : bilder) {
 			try {
 				InputStream inputStream = part.getInputStream();
-				ServletContext servletContext = (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
-				String path = servletContext.getRealPath("resources/productImages");
-				outputStream = new FileOutputStream(new File(path+"/"+produkt.getArtikelNr()+"_"+number+".png"));
+				String finalPath = RootPath + "/" + id + "_" + number + ".png";
+				Bild bild = new Bild();
+				bild.setPfad("/resources/images/" + id + "_" + number + ".png");
+				bild.setProdukt(produkt);
+				produkt.addBild(bild);
+				outputStream = new FileOutputStream(new File(finalPath));
 				int read = 0;
 				byte[] bytes = new byte[1024];
 
@@ -137,5 +177,13 @@ public class AdminController {
 
 	public void setBestellungen(List<Bestellung> bestellungen) {
 		this.bestellungen = bestellungen;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
 }

@@ -11,7 +11,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="Produkt")
-@NamedQuery(name="Produkt.findAll", query="SELECT p FROM Produkt p")
+@NamedQueries({
+@NamedQuery(name="Produkt.findAll", query="SELECT p FROM Produkt p"),
+@NamedQuery(name="Produkt.searchProdukt",query="SELECT p FROM Produkt p WHERE p.bezeichnung LIKE :bezeichnung"),
+@NamedQuery(name="Produkt.searchProduktBy",query="SELECT p from Produkt p JOIN Tag t ON (p.tags.idTags=t.idTags)  where p.bezeichnung LIKE :wert or t.name LIKE :wert")
+})
 public class Produkt implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +39,7 @@ public class Produkt implements Serializable {
 	private float preis;
 
 	//bi-directional many-to-one association to Bild
-	@OneToMany(mappedBy="produkt")
+	@OneToMany(mappedBy="produkt", cascade=CascadeType.PERSIST)
 	private List<Bild> bilds;
 
 	//bi-directional many-to-one association to Kategorie
@@ -44,7 +48,7 @@ public class Produkt implements Serializable {
 	private Kategorie kategorie;
 
 	//bi-directional many-to-many association to Tag
-	@ManyToMany(mappedBy="produkts")
+	@ManyToMany(mappedBy="produkts",cascade=CascadeType.PERSIST)
 	private List<Tag> tags;
 
 	//bi-directional many-to-many association to Bestellung
@@ -117,6 +121,11 @@ public class Produkt implements Serializable {
 
 	public void setBilds(List<Bild> bilds) {
 		this.bilds = bilds;
+	}
+	
+	public Tag addTag(Tag tag){
+		getTags().add(tag);
+		return tag;
 	}
 
 	public Bild addBild(Bild bild) {

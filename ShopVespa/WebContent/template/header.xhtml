@@ -13,9 +13,13 @@
 
 
 			<h:form class="form-inline my-2 my-lg-0 ">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search"></input>
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<h:inputText id="search" name="search" class="form-control"
+					placeholder="Search"
+					value="#{searchController.searchString}">
+				</h:inputText>
+				<h:commandButton action="#{searchController.redirect}"
+					class="btn btn-outline-success my-2 my-sm-0" value="Search">
+				</h:commandButton>
 			</h:form>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -36,16 +40,15 @@
 								class="ion-ios-person-outline icons"></i>
 						</a></li>
 					</ui:fragment>
-					
+
 					<ui:fragment rendered="#{not empty username}">
-						<li class="nav-item" ><a class="nav-link" href="profile.xhtml"> <i
-								class="ion-ios-person icons"></i>
+						<li class="nav-item"><a class="nav-link"
+							href="profile.xhtml"> <i class="ion-ios-person icons"></i>
 						</a></li>
 						<h:form>
-							<li class="nav-item" style="margin-top: 4px;">
-							<h:commandLink styleClass="nav-link"
-									action="#{loginController.logout}">
-									<i class="ion-log-out icons" style="font-size:19px;"></i>
+							<li class="nav-item" style="margin-top: 4px;"><h:commandLink
+									styleClass="nav-link" action="#{loginController.logout}">
+									<i class="ion-log-out icons" style="font-size: 19px;"></i>
 								</h:commandLink></li>
 						</h:form>
 					</ui:fragment>

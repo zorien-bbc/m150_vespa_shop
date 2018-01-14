@@ -45,7 +45,7 @@
 					<ui:repeat var="produkt" value="#{indexController.produkte}">
 						<div class="col-sm-3 productitem">
 							<h:link outcome="detail">
-								<img src="http://via.placeholder.com/150x150" alt="New York"></img>
+								<img src="#{produkt.bilds[0].pfad}" alt="New York" style="width: 201px;height:150px;"></img>
 								<f:param name="id" value="#{produkt.idProdukt}"></f:param>
 							</h:link>
 							<p style="color: red;">#{produkt.preis}</p>
