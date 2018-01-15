@@ -38,7 +38,7 @@ public class AdminController {
 	private List<Bestellung> bestellungen;
 	private OutputStream outputStream;
 	private List<String> tags;
-	private static final String RootPath = "C:/glassfish-4.1.2/glassfish4/glassfish/domains/domain1/docroot/resources/images";
+	private static final String RootPath = "/home/oliver/dev/payara41/glassfish/domains/domain1/docroot/resources/images";
 
 	@EJB
 	private ProduktService produktservice;

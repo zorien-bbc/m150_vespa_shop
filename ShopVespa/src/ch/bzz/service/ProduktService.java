@@ -76,7 +76,7 @@ public class ProduktService {
 
 	public void addToProduktTag(Produkt pro, Tag t) {
 		Query query = em
-				.createNativeQuery("INSERT INTO tags_has_produkt (`Tags_idTags`, `Produkt_idProdukte`) VALUES (?, ?)");
+				.createNativeQuery("INSERT INTO Tags_has_Produkt (`Tags_idTags`, `Produkt_idProdukte`) VALUES (?, ?)");
 		query.setParameter(1, t.getIdTags());
 		query.setParameter(2, pro.getIdProdukt());
 		query.executeUpdate();
