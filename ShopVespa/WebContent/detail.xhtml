@@ -27,20 +27,15 @@
 					<!-- The slideshow -->
 					<div class="carousel-inner">
 						<!-- Indicators -->
-						<ui:repeat var="bild" value="#{detailController.produkt.bilds}"
-							varStatus="myVarStatus">
-							<c:if test="#{myVarStatus.index==0}">
-								<div class="carousel-item active">
-									<img src="#{bild.pfad}" alt="New York"
-										style="width: 201px; height: 150px;"></img>
-								</div>
-							</c:if>
-							<c:if test="#{myVarStatus.index!=0}">
-								<div class="carousel-item">
-									<img src="#{bild.pfad}" alt="New York"
-										style="width: 201px; height: 150px;"></img>
-								</div>
-							</c:if>
+						<div class="carousel-item active">
+							<img src="#{detailController.produkt.bilds[0]}" alt="New York"
+								style="width: 201px; height: 150px;"></img>
+						</div>
+						<ui:repeat var="bild" value="#{detailController.produkt.bilds}">
+							<div class="carousel-item">
+								<img src="#{bild.pfad}" alt="New York"
+									style="width: 201px; height: 150px;"></img>
+							</div>
 						</ui:repeat>
 
 						<div class="carousel-item">
