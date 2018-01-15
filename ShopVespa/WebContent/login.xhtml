@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:body>
+	<ui:composition template="template/layout.xhtml">
+		<ui:define name="content">
+			<div>
+				<h1>Login</h1>
+				<fieldset>
+					<h:form name="loginForm">
+						<div class="form-horizontal">
+							<div class="form-group">
+								<h:outputText value="Mail" />
+								<h:inputText id="mail" value="#{loginController.mail}"
+									class="form-control"></h:inputText>
+								<h:message for="mail"></h:message>
+
+								<h:outputText value="Password" />
+								<h:inputSecret id="password" value="#{loginController.pwd}"
+									class="form-control"></h:inputSecret>
+								<h:message for="password"></h:message>
+
+								<h:messages></h:messages>
+								<a href="register.xhtml" style="float: left">Noch kein
+									Konto? Registrieren</a>
+								<h:commandButton
+									style="margin-top: 30px;
+float: left;
+margin-left: -26%;"
+									class="btn btn-success" action="#{loginController.login}"
+									value="Login"></h:commandButton>
+							</div>
+						</div>
+					</h:form>
+				</fieldset>
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -5,11 +5,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-<<<<<<< HEAD
-@Generated(value="Dali", date="2018-01-14T20:00:49.785+0100")
-=======
-@Generated(value="Dali", date="2018-01-14T20:57:32.106+0100")
->>>>>>> branch 'master' of https://github.com/zorien-bbc/m150_vespa_shop
+@Generated(value = "Dali", date = "2018-01-14T22:33:50.897+0100")
 @StaticMetamodel(Tag.class)
 public class Tag_ {
 	public static volatile SingularAttribute<Tag, Integer> idTags;

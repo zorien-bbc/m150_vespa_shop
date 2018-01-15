@@ -4,11 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:body>
 	<ui:composition template="template/layout.xhtml">
 		<ui:define name="content">
+			<c:if test="#{username =='admin'}"><a href="admin.xhtml">Open admin view</a></c:if>
 			<h:form>
 				<ui:repeat var="bestellung"
 					value="#{profileController.meineBestellungen}">

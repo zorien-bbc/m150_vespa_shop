@@ -1,53 +1,61 @@
 package ch.bzz.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the Kunde database table.
  * 
  */
 @Entity
-@Table(name="Kunde")
-@NamedQuery(name="Kunde.findAll", query="SELECT k FROM Kunde k")
+@Table(name = "Kunde")
+@NamedQuery(name = "Kunde.findAll", query = "SELECT k FROM Kunde k")
 public class Kunde implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idKunde;
 
-	@Column(name="Adresse")
+	@Column(name = "Adresse")
 	private String adresse;
 
-	@Column(name="Mail")
+	@Column(name = "Mail")
 	private String mail;
-
-	@Column(name="Nachname")
+	
+	@Column(name = "Nachname")
 	private String nachname;
 
-	@Column(name="Ort")
+	@Column(name = "Ort")
 	private String ort;
 
-	@Column(name="Passwort")
+	@Column(name = "Passwort")
 	private String passwort;
 
-	@Column(name="PLZ")
+	@Column(name = "PLZ")
 	private String plz;
 
-	@Column(name="Telefonnummer")
+	@Column(name = "Telefonnummer")
 	private String telefonnummer;
 
-	@Column(name="Vorname")
+	@Column(name = "Vorname")
 	private String vorname;
-	
-	@Column(name="isAdmin")
+
+	@Column(name = "isAdmin")
 	private Boolean isAdmin;
 
-	//bi-directional many-to-one association to Bestellung
-	@OneToMany(mappedBy="kunde",cascade = CascadeType.PERSIST)
+	// bi-directional many-to-one association to Bestellung
+	@OneToMany(mappedBy = "kunde", cascade = CascadeType.PERSIST)
 	private List<Bestellung> bestellungs;
 
 	public Kunde() {

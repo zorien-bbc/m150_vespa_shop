@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
 
 <h:body>
 	<ui:composition>
@@ -26,23 +27,19 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto right-icons">
+					
 
 					<ui:fragment rendered="#{empty username}">
-						<li class="nav-item"><a class="nav-link" data-toggle="modal"
-							data-target="#loginModal" href="#loginModal"><p
+						<li class="nav-item"><a class="nav-link" href="login.xhtml"><p
 									style="float: left; margin-top: 6px">Anmelden</p> <i
 								class="ion-ios-person-outline icons"></i> </a></li>
 					</ui:fragment>
-
 					<ui:fragment rendered="#{not empty username}">
 						<li class="nav-item"><a class="nav-link" href="profile.xhtml"><p
 									style="float: left; margin-top: 5px;">#{username}</p> <i
-								class="ion-ios-person icons"
-								style="float: left;"></i>
-						</a></li>
+								class="ion-ios-person icons" style="float: left;"></i> </a></li>
 						<li class="nav-item"><a class="nav-link" href="cart.xhtml">
 								<i class="ion-ios-cart-outline icons"></i>
 						</a></li>
@@ -53,14 +50,11 @@
 								</h:commandLink></li>
 						</h:form>
 					</ui:fragment>
-
-
 				</ul>
 
 			</div>
 		</div>
 		</nav>
-		<ui:include src="../loginModal.xhtml"></ui:include>
 
 	</ui:composition>
 </h:body>
